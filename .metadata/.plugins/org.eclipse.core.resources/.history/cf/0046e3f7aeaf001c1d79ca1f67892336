@@ -1,0 +1,52 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class App 
+{
+	public static Graph graphy = new Graph();
+	
+	public static String performManipluationOnGraph() {
+		
+		//Create new / get adjacency list map
+		Map<Vertex, List<Vertex>> adjacencyList = graphy.getAdjacencyLists();
+		
+		//Insert some vertices
+		String[] names = {"Fred", "Wilmer", "Charlie", "Vanessa", "Bart"};
+		int counter = 0;
+		for(String name : names) {
+			graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), new Vertex(counter, name)));
+			counter += 1;
+		}
+		
+		//insert some edges
+		Set<Vertex>  adjacencyListSet = adjacencyList.keySet();
+		Vertex[] vertices = new Vertex[adjacencyListSet.size()];
+		counter = 0;
+		for(Vertex v : adjacencyListSet) {
+			vertices[counter] = v;
+			counter += 1;
+		}
+		for(int i = 0; i < 6; i++) {
+			int randomNum1 = ThreadLocalRandom.current().nextInt(0, adjacencyListSet.size());
+			int randomNum2 = ThreadLocalRandom.current().nextInt(0, adjacencyListSet.size());
+			while(randomNum1 == randomNum2)
+				randomNum2 = ThreadLocalRandom.current().nextInt(0, adjacencyListSet.size());
+			graphy.setAdjacencyLists(graphy.addEdge(adjacencyList, vertices[randomNum1], vertices[randomNum2], false));
+		}
+		
+		return graphy.toString(graphy.getAdjacencyLists());
+	}
+	
+	
+	
+    public static void main( String[] args )
+    {
+        System.out.println(performManipluationOnGraph());
+    }
+}

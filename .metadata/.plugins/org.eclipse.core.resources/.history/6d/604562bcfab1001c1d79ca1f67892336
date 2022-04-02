@@ -1,0 +1,26 @@
+package com.Jordan.GraphLibrary;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Test;
+import com.Jordan.GraphLibrary.*;
+
+public class AppTest 
+{
+    
+    @Test
+    public void VerifyAddEdgeSingleDirection()
+    {
+    	Graph<Integer> graphy = new Graph();
+    	Vertex<Integer> v1 = new Vertex<Integer>(0, 2);
+    	Vertex<Integer> v2 = new  Vertex<Integer>(1, 5);
+    	//graphy.addVertex(v1);
+    	//graphy.addVertex(v2);
+    	graphy.addEdge(v1, v2, false);
+    	assertTrue(graphy.getMap().get(v1).contains(v2));
+    };
+    
+}

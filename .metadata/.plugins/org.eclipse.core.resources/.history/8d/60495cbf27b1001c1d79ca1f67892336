@@ -1,0 +1,102 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.Set;
+
+public class Graph implements GraphInterface<Vertex>{ 
+
+    private List<Vertex> adjacencyLists;
+    
+    public List<Vertex> addEdge(List<Vertex> lists, Vertex source, Vertex destination, boolean bidirectional) {
+    if (!lists.contains(source))
+		addVertex(lists, source);
+
+	if (!lists.contains(destination))
+		addVertex(lists, destination);
+	
+	Set<Vertex> sourceNeighborVertices = source.getNeighborVertices();
+	sourceNeighborVertices.add(destination);
+	source.setNeighborVertices(sourceNeighborVertices);
+	
+	if (bidirectional == true) {
+		lists.get(lists.indexOf(destination)).getNeighborVertices().add(source);
+	}
+	
+	return lists;
+}
+    
+    public List<Vertex> addVertex(List<Vertex> lists, Vertex v)
+	{
+		lists.add(v);
+		return lists;
+	}
+    
+    public List<Vertex> search(int value, Vertex start){
+    	List<Vertex> resultsList = new ArrayList<Vertex>();
+    	Set<Vertex> alreadyVisited = new HashSet<>();
+    	 Queue<Vertex> queue = new ArrayDeque<>();
+    	    queue.add(start);
+
+    	    Vertex currentVertex;
+
+    	    while (!queue.isEmpty()) {
+    	        currentVertex = queue.remove();
+    	         resultsList.add(currentVertex);
+
+    	         if (currentVertex.getValue() == value) {
+    	             break;
+    	         } else {
+    	             alreadyVisited.add(currentVertex);
+    	             queue.addAll(currentVertex.getNeighborVertices());
+    	             queue.removeAll(alreadyVisited);
+    	         }
+    	     }
+
+    	     return resultsList;
+    }
+    
+	public Graph() {
+		super();
+		this.adjacencyLists = new HashMap<Vertex, List<Vertex>>();
+	}
+
+	public Graph(Map<Vertex, List<Vertex>> adjacencyLists) {
+		super();
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public Map<Vertex, List<Vertex>> getAdjacencyLists() {
+		return adjacencyLists;
+	}
+
+	public void setAdjacencyLists(Map<Vertex, List<Vertex>> adjacencyLists) {
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public String toString(Map<Vertex, List<Vertex>> lists)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		for (Vertex v : lists.keySet()) {
+			builder.append(v.toString() + ": ");
+			for (Vertex w : lists.get(v)) {
+				builder.append(w.toString() + " ");
+			}
+			builder.append("\n");
+		}
+
+		return (builder.toString());
+	}
+
+	
+    
+}

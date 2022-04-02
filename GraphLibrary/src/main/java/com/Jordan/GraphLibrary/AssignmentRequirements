@@ -1,0 +1,50 @@
+Assignment Requirements
+-----------------------
+
+For this assignment, implement a simple java library to work with mathematical graphs.  For our purposes, a graph is a collection of vertices and edges.  The vertices should be a user-defined type. The edges do not have to be user-defined, but should support arbitrary vertices.
+
+Your library should support two kinds of graphs:
+* Directed, where A->B is not the same as B->A
+* Undirected, where A<->B is the same is B<->A
+
+Both kinds of graphs should support 3 operations:
+* addVertex - adds vertex to the graph
+* addEdge - adds an edge to the graph
+* getPath - returns a list of edges that form a path between two vertices (the path doesn’t have to be optimal - any path will do)
+
+The vertices should be of a user defined type.
+
+Once finished, please share your code with us, and be prepared to answer the following questions (you don't have to implement these):
+* How do you add support for weighted edges?
+* How would you add a traverse function that will take a user defined function and apply it on every vertex of the graph?
+* How would you make your graph operations thread safe?
+
+1. Support for weighted edges would include using an Edge class like so:
+class Edge {
+ int source;
+ int destination;
+ int weight;
+ 
+ This would allow us to traverse the edges and add weights to determine efficient routes
+ 
+ 2. Traversing all nodes recursively:
+ 
+ //Assuming each node had a set of neighbors/Edges
+ public static void dfsRecursive(Node startNode, Set<Integer> visited) {
+        System.out.println(startNode.value);
+        visited.add(startNode.value);
+        
+        for (Node n : startNode.neighbors) {
+            if (!visited.contains(n.value)) {
+            	//So something here (Example: n.neighbors.add(new Node(88, "Brad")); )
+                dfsRecursive(n, visited);
+            }
+        }
+    }
+    
+ 3. We make our operations thread safe by implementing getters and setters for private/static variables and making as many methods as possible stateless.
+ 
+ 
+   
+ 
+ 

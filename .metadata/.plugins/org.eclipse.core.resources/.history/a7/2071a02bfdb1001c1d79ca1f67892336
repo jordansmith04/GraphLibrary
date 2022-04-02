@@ -1,0 +1,74 @@
+package com.Jordan.GraphLibrary;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Test;
+import com.Jordan.GraphLibrary.*;
+
+public class AppTest 
+{
+    
+    @Test
+    public void VerifyAddEdgeSingleDirection()
+    {
+    	Graph<Integer> graphy = new Graph();
+    	Vertex<Integer> v1 = new Vertex<Integer>(0, 2);
+    	Vertex<Integer> v2 = new  Vertex<Integer>(1, 5);
+    	graphy.addEdge(v1, v2, false);
+    	assertTrue(graphy.getMap().get(v1).contains(v2));
+    };
+    
+    @Test
+    public void VerifyAddEdgeBidirectional()
+    {
+    	Graph<Integer> graphy = new Graph();
+    	Vertex<Integer> v1 = new Vertex<Integer>(0, 2);
+    	Vertex<Integer> v2 = new  Vertex<Integer>(1, 5);
+    	graphy.addEdge(v1, v2, true);
+    	assertTrue(graphy.getMap().get(v1).contains(v2));
+    	assertTrue(graphy.getMap().get(v2).contains(v1));
+    };
+    
+    @Test
+    public void VerifyFindPathBidirectional()
+    {
+    	Graph<Integer> graphy = new Graph();
+    	Vertex<Integer> v1 = new Vertex<Integer>(0, 2);
+    	Vertex<Integer> v2 = new  Vertex<Integer>(1, 5);
+    	Vertex<Integer> v3 = new Vertex<Integer>(2, 6);
+    	Vertex<Integer> v4 = new  Vertex<Integer>(3, 7);
+    	Vertex<Integer> v5 = new Vertex<Integer>(4, 9);
+    	Vertex<Integer> v6 = new  Vertex<Integer>(5, 15);
+    	graphy.addEdge(v1, v2, true);
+    	graphy.addEdge(v1, v4, true);
+		graphy.addEdge(v2, v5, true);
+		graphy.addEdge(v3, v4, true);
+		graphy.addEdge(v4, v6, true);
+		graphy.addEdge(v5, v6, true);
+		System.out.println(graphy.getAllPaths(graphy.getMap(), v1, v6));
+    	assertTrue(graphy.getAllPaths(graphy.getMap(), v1, v6).size() > 0);
+    };
+ 
+    @Test
+    public void VerifyFindPathSingleDirectional()
+    {
+    	Graph<Integer> graphy = new Graph();
+    	Vertex<Integer> v1 = new Vertex<Integer>(0, 2);
+    	Vertex<Integer> v2 = new  Vertex<Integer>(1, 5);
+    	Vertex<Integer> v3 = new Vertex<Integer>(2, 6);
+    	Vertex<Integer> v4 = new  Vertex<Integer>(3, 7);
+    	Vertex<Integer> v5 = new Vertex<Integer>(4, 9);
+    	Vertex<Integer> v6 = new  Vertex<Integer>(5, 15);
+    	graphy.addEdge(v1, v2, false);
+    	graphy.addEdge(v1, v4, false);
+		graphy.addEdge(v2, v5, false);
+		graphy.addEdge(v3, v4, false);
+		graphy.addEdge(v4, v6, false);
+		graphy.addEdge(v5, v6, false);
+		System.out.println(graphy.getAllPaths(graphy.getMap(), v1, v6));
+    	assertTrue(graphy.getAllPaths(graphy.getMap(), v1, v6).size() > 0);
+    };
+}

@@ -1,0 +1,14 @@
+package Graphs;
+
+import java.util.List;
+import java.util.Map;
+
+
+public interface GraphInterface<T> {
+	
+	Map<T, List<T>> addEdge(Map<T, List<T>> graphList, T source, T destination, boolean bidirectional);
+	
+	Map<Vertex, List<Vertex>> addVertex(Map<T, List<T>> graphList, T vertex);
+	
+	List<Vertex> getPath(Map<T, List<T>> graphList, T source, T destination, boolean bidirectional);
+}

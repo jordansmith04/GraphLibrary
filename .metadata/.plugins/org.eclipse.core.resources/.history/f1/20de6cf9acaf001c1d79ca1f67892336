@@ -1,0 +1,36 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.List;
+import java.util.Map;
+
+public class App 
+{
+	public static Graph graphy = new Graph();
+	public static Vertex fred = new Vertex(0, "Fred");
+	public static Vertex wilmer = new Vertex(1, "Wilmer");
+	public static Vertex vanessa = new Vertex(2, "Vanessa");
+	public static Vertex charlie = new Vertex(3, "Charlie");
+	public static Vertex bart = new Vertex(4, "Bart");
+	
+	public static String performManipluationOnGraph() {
+		graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), vanessa));
+		graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), fred));
+		graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), charlie));
+		graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), wilmer));
+		graphy.setAdjacencyLists(graphy.addVertex(graphy.getAdjacencyLists(), bart));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), charlie, bart, false));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), charlie, wilmer, false));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), charlie, vanessa, false));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), wilmer, bart, false));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), fred, charlie, false));
+		graphy.setAdjacencyLists(graphy.addEdge(graphy.getAdjacencyLists(), fred, bart, false));
+		
+		return graphy.toString(graphy.getAdjacencyLists());
+	}
+	
+	
+    public static void main( String[] args )
+    {
+        System.out.println(performManipluationOnGraph());
+    }
+}

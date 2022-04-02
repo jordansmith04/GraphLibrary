@@ -1,0 +1,169 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.Set;
+import java.util.logging.Logger;
+
+public class Graph implements GraphInterface<Vertex> {
+
+	private List<Vertex> adjacencyLists;
+	private List<List<Vertex>> paths;
+
+	public List<Vertex> addEdge(List<Vertex> lists, Vertex source, Vertex destination, boolean bidirectional) {
+		if (!lists.contains(source))
+			addVertex(lists, source);
+
+		if (!lists.contains(destination))
+			addVertex(lists, destination);
+
+		Set<Vertex> sourceNeighborVertices = source.getNeighborVertices();
+		sourceNeighborVertices.add(destination);
+		source.setNeighborVertices(sourceNeighborVertices);
+
+		if (bidirectional == true) {
+			Set<Vertex> destNeighborVertices = destination.getNeighborVertices();
+			destNeighborVertices.add(destination);
+			destination.setNeighborVertices(destNeighborVertices);
+		}
+		return lists;
+	}
+
+	public List<Vertex> addVertex(List<Vertex> lists, Vertex v) {
+		lists.add(v);
+		return lists;
+	}
+
+	public List<String> search(Vertex start, Vertex end) {
+		
+		//start at start
+		//get neighbors
+		//add neighbors to queue
+		//check each neighbor for end, else add their neighbors to queue //example: 0, n = 1, 2, 3; 3, n = 4; 2, n =; 1, n = 3;
+		//repeat until end found //Store 0, 
+		List<Vertex> alreadyVisited = new ArrayList<Vertex>();
+		Queue<Vertex> queue = new ArrayDeque<>();
+		List<String> vertexNameList = new ArrayList<String>();
+		queue.add(start);
+		vertexNameList.add(start.getName());
+
+		Vertex currentVertex;
+
+		while (!queue.isEmpty()) {
+		    currentVertex = queue.remove();
+		    alreadyVisited.add(currentVertex);
+		    System.out.println("Visited node with value: " + currentVertex.getName());
+
+		    if (currentVertex.equals(end)) {
+		        return vertexNameList;
+		    } else {
+		        alreadyVisited.add(currentVertex);
+		        queue.addAll(currentVertex.getNeighborVertices());
+		        queue.removeAll(alreadyVisited);
+		    }
+		}
+		
+		//vertexNameList.add("There were no connections from Vertex with name: " + start.getName() + " to Vertex with value: " + end.getName());
+		return vertexNameList;
+	}
+
+	public List<List<Vertex>> printAllPaths(List<Vertex> vertices, Vertex start, Vertex end)
+	{
+	    boolean[] isVisited = new boolean[adjacencyLists.size()];
+	   List<Vertex> pathList = new ArrayList<>();
+
+	    // add source to path[]
+	    pathList.add(start);
+
+	    // Call recursive utility
+	    getAllPathsUtil(vertices, start, end, isVisited, pathList);
+	    
+	    return getPaths();
+	}
+
+	// A recursive function to print
+	// all paths from 'u' to 'd'.
+	// isVisited[] keeps track of
+	// vertices in current path.
+	// localPathList<> stores actual
+	// vertices in the current path
+	private void getAllPathsUtil(List<Vertex> vertices, Vertex start, Vertex end, boolean[] isVisited, List<Vertex> localPathList)
+	{
+		if(!start.equals(end)) {
+	    // Mark the current node
+	    isVisited[start.getValue()] = true;
+
+	    // Recur for all the vertices
+	    // adjacent to current vertex
+	    for (Vertex v : start.getNeighborVertices()) {
+	        if (!isVisited[v.getValue()]) {
+	            // store current node
+	            // in path[]
+	            localPathList.add(v);
+	            getAllPathsUtil(vertices, v, end, isVisited, localPathList);
+
+	            // remove current node
+	            // in path[]
+	            localPathList.remove(v);
+	        }
+	    }
+
+	    // Mark the current node
+	    isVisited[start.getValue()] = false;
+		} else 
+			addPathToPaths(localPathList);
+	}
+	
+	public Graph() {
+		super();
+		this.adjacencyLists = new ArrayList<Vertex>();
+		this.paths = new ArrayList<ArrayList<Vertex>>();
+	}
+
+	public Graph(List<Vertex> adjacencyLists) {
+		super();
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public List<Vertex> getAdjacencyLists() {
+		return adjacencyLists;
+	}
+
+	public void setAdjacencyLists(List<Vertex> adjacencyLists) {
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public List<List<Vertex>> getPaths() {
+		return paths;
+	}
+
+	public void setPaths(List<List<Vertex>> paths) {
+		this.paths = paths;
+	}
+	
+	public void addPathToPaths(List<Vertex> path) {
+		List<List<Vertex>> graphPaths = getPaths();
+		graphPaths.add(path);
+		setPaths(graphPaths);
+	}
+
+	public String toString(List<Vertex> list) {
+		StringBuilder builder = new StringBuilder();
+
+		for (Vertex v : list) {
+			builder.append(v.toString() + ": ");
+			builder.append("\n");
+		}
+
+		return builder.toString();
+	}
+
+}

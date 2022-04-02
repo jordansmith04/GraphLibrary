@@ -1,0 +1,17 @@
+package com.Jordan.GraphLibrary;
+
+public class App 
+{
+	Graph graph = new Graph();
+	Vertex fred = new Vertex(0, "Fred");
+	Vertex wilmer = new Vertex(1, "Wilmer");
+	Vertex vanessa = new Vertex(2, "Vanessa");
+	Vertex charlie = new Vertex(3, "Charlie");
+	Vertex bart = new Vertex(4, "Bart");
+	
+	
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}

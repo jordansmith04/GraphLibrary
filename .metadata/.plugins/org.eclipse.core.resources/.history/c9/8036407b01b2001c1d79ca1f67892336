@@ -1,0 +1,81 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+public class Vertex<T> {
+
+	private int value;
+	private T name;
+	public Set<Vertex<T>> neighborVertices;
+
+	public Vertex(int value, T name, Set<Vertex<T>> neighborVertices) {
+		super();
+		this.value = value;
+		this.name = name;
+		this.neighborVertices = neighborVertices;
+	}
+	
+	public Vertex(int value, T name) {
+		super();
+		this.value = value;
+		this.name = name;
+		this.neighborVertices = new HashSet<Vertex<T>>();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(Vertex<T> v: neighborVertices)
+			sb.append(v.getName() + " ");
+		return "Vertex<T> [value=" + value + ", name=" + name + ", neighborVertices=" + sb.toString() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, neighborVertices, value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vertex<T> other = (Vertex<T>) obj;
+		return Objects.equals(name, other.name) && Objects.equals(neighborVertices, other.neighborVertices)
+				&& value == other.value;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public T getName() {
+		return name;
+	}
+
+	public void setName(T name) {
+		this.name = name;
+	}
+
+	public Set<Vertex<T>> getNeighborVertices() {
+		return neighborVertices;
+	}
+
+	public void setNeighborVertices(Set<Vertex<T>> neighborVertices) {
+		this.neighborVertices = neighborVertices;
+	}
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,27 @@
+package Graphs;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+class Graph { 
+
+    private Map<Vertex, List<Vertex>> adjacencyLists;
+   /*
+    Graph(Map<Vertex, List<Vertex>>) { 
+        adjacencyLists = new HashMap<Vertex, List<Vertex>>(); 
+        for(Vertex vert : vertices){
+        	adjacencyLists.put(vert, )
+    }
+*/
+	public Graph() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void addEdge(Vertex source, Vertex destination, boolean bidirectional)
+        
+    } 
+    
+}

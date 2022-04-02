@@ -1,0 +1,37 @@
+package Graphs;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class GraphImpl implements GraphInterface<Vertex> {
+
+	@Override
+	public void addEdge(Graph graph, int vertexSourceInt, int vertexDestinationInt, boolean bidirectional) {
+
+			if (!graph.getAdjacencyLists())
+				addVertex(source);
+
+			if (!graphList.containsKey(destination))
+				addVertex(destination);
+
+			graphList.get(source).add(destination);
+			if (bidirectional == true) {
+				graphList.get(destination).add(source);
+			}
+	}
+
+	@Override
+	public void addVertex(Map<Vertex, List<Vertex>> graphList, Vertex edge) {
+		graphList.put(edge, new LinkedList<Vertex>());
+		
+	}
+
+	@Override
+	public void getPath(Map<Vertex, List<Vertex>> graphList, Vertex source, Vertex destination, boolean bidirectional) {
+		
+	}
+
+	
+	
+}

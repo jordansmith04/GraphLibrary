@@ -1,0 +1,86 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class Graph implements GraphInterface<Vertex>{ 
+
+    private Map<Vertex, List<Vertex>> adjacencyLists;
+    
+    public Map<Vertex, List<Vertex>> addEdge(Map<Vertex, List<Vertex>> lists, Vertex source, Vertex destination, boolean bidirectional) {
+    if (!lists.containsKey(source))
+		addVertex(lists, source);
+
+	if (!lists.containsKey(destination))
+		addVertex(lists, destination);
+
+	lists.get(source).add(destination);
+	if (bidirectional == true) {
+		lists.get(destination).add(source);
+	}
+	
+	return lists;
+}
+    
+    public Map<Vertex, List<Vertex>> addVertex(Map<Vertex, List<Vertex>> lists, Vertex v)
+	{
+		lists.put(v, new LinkedList<Vertex>());
+		return lists;
+	}
+    
+    public List<Vertex> getPath(Map<Vertex, List<Vertex>> lists, Vertex startingVertex, Vertex endingVertex, boolean bidirectional){
+    	List<Vertex> path = new LinkedList<Vertex>();
+    	for(Vertex v : lists.keySet()) {
+    		if((v.equals(startingVertex) || v.equals(endingVertex)) && bidirectional) {
+    			List<Vertex> tempList = lists.get(v);
+    			if(tempList.contains(endingVertex))
+    				path = lists.get(v);
+    			}
+    		else if(v.equals(startingVertex) && bidirectional) {
+    			List<Vertex> tempList = lists.get(v);
+    			if(tempList.contains(endingVertex))
+    				path = lists.get(v);
+    		}
+    	}
+		return path;
+    }
+    
+	public Graph() {
+		super();
+		this.adjacencyLists = new HashMap<Vertex, List<Vertex>>();
+	}
+
+	public Graph(Map<Vertex, List<Vertex>> adjacencyLists) {
+		super();
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public Map<Vertex, List<Vertex>> getAdjacencyLists() {
+		return adjacencyLists;
+	}
+
+	public void setAdjacencyLists(Map<Vertex, List<Vertex>> adjacencyLists) {
+		this.adjacencyLists = adjacencyLists;
+	}
+
+	public String toString(Map<Vertex, List<Vertex>> lists)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		for (Vertex v : lists.keySet()) {
+			builder.append(v.toString() + ": ");
+			for (Vertex w : lists.get(v)) {
+				builder.append(w.toString() + " ");
+			}
+			builder.append("\n");
+		}
+
+		return (builder.toString());
+	}
+
+	
+    
+}

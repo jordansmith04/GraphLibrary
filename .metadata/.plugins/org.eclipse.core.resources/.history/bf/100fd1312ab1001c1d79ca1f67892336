@@ -1,0 +1,62 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class App 
+{
+	public static Graph graphy = new Graph();
+	
+	public static void performOneDirectionalManipulationOnGraph() {
+		
+		//Create new / get adjacency list map
+		List<Vertex> adjacencyList = graphy.getAdjacencyLists();
+		String[] names = {"Fred", "Wilmer", "Charlie", "Vanessa", "Bart"};
+		Vertex[] vertices = new Vertex[names.length];
+		
+		//Insert some vertices
+		int counter = 0;
+		for(String name : names) {
+			Vertex v = new Vertex(counter, name);
+			vertices[counter] = v;
+			adjacencyList = graphy.addVertex(adjacencyList, v);
+			counter += 1;
+		}
+		
+		//insert some edges		
+		for(int i = 0; i < 6; i++) {
+			int[] randoms = generateTwoRandomNumbers(0, vertices.length);
+			adjacencyList = graphy.addEdge(adjacencyList, vertices[randoms[0]], vertices[randoms[1]], false);
+		}
+		
+		//Printing graph structure
+		//System.out.println(graphy.toString(adjacencyList));
+		
+		//Print path between two vertices
+		int[] randoms = generateTwoRandomNumbers(0, vertices.length);
+		System.out.println("Searching for node with value: " + randoms[0] + " and starting at vertex with value: " +  vertices[randoms[1]].getValue());
+		System.out.println(graphy.search(vertices[randoms[0]], vertices[randoms[1]]));
+	}
+	
+	public static int[] generateTwoRandomNumbers(int min, int max){
+		int[] randoms = new int[2];
+		int randomNum1 = ThreadLocalRandom.current().nextInt(min, max);
+		int randomNum2 = ThreadLocalRandom.current().nextInt(min, max);
+		while(randomNum1 == randomNum2)
+			randomNum2 = ThreadLocalRandom.current().nextInt(min, max);
+		randoms[0] = randomNum1;
+		randoms[1] = randomNum2;
+		return randoms;
+	}
+	
+	
+	
+    public static void main( String[] args )
+    {
+        performOneDirectionalManipulationOnGraph();
+    }
+}

@@ -1,0 +1,12 @@
+package Graphs;
+
+import java.util.LinkedList;
+
+public class Vertex {
+
+	private int value;
+	private String name;
+	private LinkedList connectedNodes;
+	
+	
+}

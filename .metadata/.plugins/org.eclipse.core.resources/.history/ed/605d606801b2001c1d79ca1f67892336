@@ -1,0 +1,57 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.List;
+
+public class TempPath {
+
+	
+	private List<Vertex> vertices;
+	private Vertex start;
+	private Vertex end;
+	private boolean[] isVisited;
+	private List<Vertex> localPathList;
+	public List<Vertex> getVertices() {
+		return vertices;
+	}
+	public void setVertices(List<Vertex> vertices) {
+		this.vertices = vertices;
+	}
+	public Vertex getStart() {
+		return start;
+	}
+	public void setStart(Vertex start) {
+		this.start = start;
+	}
+	public Vertex getEnd() {
+		return end;
+	}
+	public void setEnd(Vertex end) {
+		this.end = end;
+	}
+	public boolean[] getIsVisited() {
+		return isVisited;
+	}
+	public void setIsVisited(boolean[] isVisited) {
+		this.isVisited = isVisited;
+	}
+	public List<Vertex> getLocalPathList() {
+		return localPathList;
+	}
+	public void setLocalPathList(List<Vertex> localPathList) {
+		this.localPathList = localPathList;
+	}
+	public TempPath(List<Vertex> vertices, Vertex start, Vertex end, boolean[] isVisited, List<Vertex> localPathList) {
+		super();
+		this.vertices = vertices;
+		this.start = start;
+		this.end = end;
+		this.isVisited = isVisited;
+		this.localPathList = localPathList;
+	}
+	public TempPath() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+}

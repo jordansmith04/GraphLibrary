@@ -1,0 +1,15 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+
+public interface GraphInterface<T> {
+	
+	List<T> addEdge(List<T> lists, T source, T destination, boolean bidirectional);
+	
+	List<List<T>> printAllPaths(List<T> vertices, T start, T end);
+	
+	List<T> addT(List<T> lists, T v);
+}

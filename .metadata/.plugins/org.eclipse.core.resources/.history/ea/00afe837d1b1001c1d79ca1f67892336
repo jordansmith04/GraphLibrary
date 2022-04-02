@@ -1,0 +1,15 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.List;
+
+public class TempPath {
+
+	
+	private List<Vertex> vertices;
+	private Vertex start;
+	private Vertex end;
+	private boolean[] isVisited;
+	private List<Vertex> localPathList;
+	
+	
+}

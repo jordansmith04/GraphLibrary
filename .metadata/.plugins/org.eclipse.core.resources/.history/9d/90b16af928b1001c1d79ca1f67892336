@@ -1,0 +1,14 @@
+package com.Jordan.GraphLibrary;
+
+import java.util.List;
+import java.util.Map;
+
+
+public interface GraphInterface<T> {
+	
+	List<Vertex> addEdge(List<Vertex> lists, Vertex source, Vertex destination, boolean bidirectional);
+	
+	List<Vertex> search(Vertex source, Vertex destination);
+	
+	List<Vertex> addVertex(List<Vertex> lists, Vertex v);
+}

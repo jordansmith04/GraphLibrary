@@ -1,0 +1,5 @@
+package com.Jordan.GraphLibrary;
+
+public final class GraphFactory {
+
+}

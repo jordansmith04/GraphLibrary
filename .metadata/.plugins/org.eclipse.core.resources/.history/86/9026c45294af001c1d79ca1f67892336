@@ -1,0 +1,7 @@
+package Graphs;
+
+public interface Graph {
+	//addVertex - adds vertex to the graph
+	// addEdge - adds an edge to the graph
+	//getPath
+}

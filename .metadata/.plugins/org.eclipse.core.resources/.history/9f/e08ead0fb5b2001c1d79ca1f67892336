@@ -1,0 +1,22 @@
+package com.Jordan.GraphLibrary.Models;
+
+import java.util.List;
+import java.util.Map;
+
+
+public interface GraphInterface<T> {
+	
+	/**
+	* Adds a connection between the source node and the destination node. If bidirectional is true, the connection will be added for both the source and destination nodes.
+	*
+	* @param stringToPad the {@link String} to be padded
+	* @param totalLength total length of the new {@link String}
+	* @return the padded {@link String}
+	*/
+	Map<Vertex<T>, List<Vertex<T>>> addEdge(Vertex<T> source, Vertex<T> destination, boolean bidirectional);
+	
+	Map<Vertex<T>, List<Vertex<T>>> addVertex(Vertex<T> s);
+	
+	List<List<Vertex<T>>> getAllPaths(Map<Vertex<T>, List<Vertex<T>>> map, Vertex<T> start, Vertex<T> end);
+	
+}

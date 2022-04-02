@@ -1,0 +1,17 @@
+package Graphs;
+
+import java.util.LinkedList;
+
+class Graph { 
+    private int Vertices;   // No. of vertices 
+    private LinkedList<Integer> adjacencyLists[]; //Adjacency Lists 
+   
+    Graph(int v) { 
+        Vertices = v; 
+        adjacencyLists = new LinkedList[v]; 
+        for (int i=0; i<v; ++i)         //create adjacency lists
+        	adjacencyLists[i] = new LinkedList(); 
+    }
+    
+    
+}
